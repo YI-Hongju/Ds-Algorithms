@@ -1,0 +1,6 @@
+# Mac trashes
+.DS_Store
+.localized
+
+# Tests
+test.py
