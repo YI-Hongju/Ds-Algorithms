@@ -9,5 +9,7 @@ test.c
 test.out
 
 # Binaries
+out/
+
 *.out
 *.exe
