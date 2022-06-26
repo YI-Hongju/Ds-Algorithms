@@ -2,8 +2,8 @@
 
 int main(void) {
     FILE *dbFile = loadFile();
-    printf("%p\n", dbFile); // Test code
+    // printf("%p\n", dbFile); // Test code
 
-    // dataBasing(dbFile); // TODOs
+    dataBasing(dbFile); // TODOs
     return 0;
 }

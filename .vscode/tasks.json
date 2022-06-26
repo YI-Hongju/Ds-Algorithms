@@ -13,6 +13,7 @@
 
 				// Arguments
 				"${fileDirname}/loader.c",
+				"${fileDirname}/db.c",
 				
 				// Running codes
 				"&&",
