@@ -1,12 +1,12 @@
 #include "_headers/movieDB.h"
 
-FILE * loadFile() {
-    FILE * dbFile = fopen("../Files/movies.txt", "rb+");
+FILE * loadFile(void) {
+    FILE * fPtr = fopen("../Files/movies.txt", "rb+");
 
-    if (!dbFile) {
+    if (!fPtr) {
         printf("File loading Error!\n");
         exit(1);
     } else {
-        return dbFile;
+        return fPtr;
     }
 }

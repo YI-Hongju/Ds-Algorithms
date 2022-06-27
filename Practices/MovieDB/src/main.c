@@ -1,9 +1,9 @@
 #include "_headers/movieDB.h"
 
 int main(void) {
-    FILE *dbFile = loadFile();
-    // printf("%p\n", dbFile); // Test code
+    FILE *fPtr = loadFile();
+    // printf("%p\n", fPtr); // Test code
 
-    dataBasing(dbFile); // TODOs
+    dataBasing(fPtr); // TODOs
     return 0;
 }
