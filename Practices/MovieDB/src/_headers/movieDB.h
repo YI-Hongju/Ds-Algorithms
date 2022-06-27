@@ -6,5 +6,6 @@
 
 FILE * loadFile(void);
 void dataBasing(FILE *);
+void clearIBuffer(void);
 
 #endif
