@@ -1,6 +1,3 @@
-from operator import is_
-
-
 def get_l1_norm(main_coord, sub_coord):
     x = abs(main_coord[0] - sub_coord[0])
     y = abs(main_coord[1] - sub_coord[1])
@@ -27,72 +24,88 @@ def is_partitioned(main_coord, sub_coord, x_arr):
             # 1: Same x or y coord.
             # 2: Difference x or y coord.
     '''
-    if x1 == x2 or y1 == y2:
-        pass
-    elif x1 != x2 or y1 != y2:
-        pass
+    if x1 == x2 or y1 == y2: # n_n_partition == 1
+        if x1 == x2 and y1 != y2: # Same x coord.
+            p_x = x1
 
-    # # -----------------------------------------------
-    # if x2 - x1 > 0 and y2 - y1 > 0:
-    #     p1_x = x1 # Partition order from 'top'
-    #     p1_y = y2
-    #     p2_x = x2
-    #     p2_y = y1
+            if y2 > y1: # Top side
+                p_y = y1 + 1
+            elif y1 > y2: # Bottom side
+                p_y = y1 - 1
 
-    #     p1 = (p1_x, p1_y)
-    #     p2 = (p2_x, p2_y)
-        
-    # elif x2 - x1 > 0 and y2 - y1 < 0:
-    #     p1_x = x2 # Partition order from 'top'
-    #     p1_y = y1
-    #     p2_x = x1
-    #     p2_y = y2
+            if (p_x, p_y) in x_arr:
+                if p_x < 0 or p_y < 0:
+                    return 0
+                else:
+                    return 1
+            elif (p_x, p_y) not in x_arr:
+                return 0
+        elif y1 == y2 and x1 != x2: # Same y coord.
+            p_y = y1
 
-    #     p1 = (p1_x, p1_y)
-    #     p2 = (p2_x, p2_y)
+            if x2 > x1: # Right side
+                p_x = x1 + 1
+            elif x1 > x2: # Left side
+                p_x = x1 - 1
 
-    # elif x2 - x1 < 0 and y2 - y1 < 0:
-    #     p1_x = x2 # Partition order from 'top'
-    #     p1_y = y1
-    #     p2_x = x1
-    #     p2_y = y2
+            if (p_x, p_y) in x_arr:
+                if p_x < 0 or p_y < 0:
+                    return 0
+                else:
+                    return 1
+            elif (p_x, p_y) not in x_arr:
+                return 0
+        else:
+            print('Coord. error!')
+            return False
 
-    #     p1 = (p1_x, p1_y)
-    #     p2 = (p2_x, p2_y)
+    elif x1 != x2 and y1 != y2: # n_n_partition == 2
+        if (x2 - x1 > 0) and (y2 - y1 > 0): # 1 in clock
+            p1_x = x1
+            p1_y = y1 + 1
+            p2_x = x1 + 1
+            p2_y = y1
 
-    # elif x2 - x1 < 0 and y2 - y1 > 0:
-    #     p1_x = x1 # Partition order from 'top'
-    #     p1_y = y2
-    #     p2_x = x2
-    #     p2_y = y1
+            p1 = (p1_x, p1_y)
+            p2 = (p2_x, p2_y)
+        elif (x2 - x1 > 0) and (y2 - y1 < 0): # 5 in clock
+            p1_x = x1 + 1
+            p1_y = y1
+            p2_x = x1
+            p2_y = y1 - 1
 
-    #     p1 = (p1_x, p1_y)
-    #     p2 = (p2_x, p2_y)
-    # elif x2 - x1 == 0: # Top or Bottom side
-    #     p1_x = x1 # Same 'x' coord
+            p1 = (p1_x, p1_y)
+            p2 = (p2_x, p2_y)
+        elif (x2 - x1 < 0) and (y2 - y1 < 0): # 7 in clock
+            p1_x = x1 - 1
+            p1_y = y1
+            p2_x = x1
+            p2_y = y1 - 1
 
-    #     if y2 - y1 > 0: # Top side
-    #         p1_y = y1 + 1
-    #     elif y2 - y1 < 0: # Bottom side from (x1, y1)
-    #         p1_y = y1 - 1
+            p1 = (p1_x, p1_y)
+            p2 = (p2_x, p2_y)
+        elif (x2 - x1 < 0) and (y2 - y1 > 0): # 11 in clock
+            p1_x = x1
+            p1_y = y1 + 1
+            p2_x = x1 - 1
+            p2_y = y1
 
-    #     p1 = (p1_x, p1_y)
-    #     p2 = (p1_x, p1_y) # Same 'x' coord
-    # elif y2 - y1 == 0: # Right or Left side
-    #     p1_y = y1 # Same 'y' coord
+            p1 = (p1_x, p1_y)
+            p2 = (p2_x, p2_y)
+        else:
+            print('Coord. error!')
+            return False
 
-    #     if x2 - x1 > 0: # Right side
-    #         p1_x = x1 + 1
-    #     elif x2 - x1 < 0: # Bottom side from (x1, y1)
-    #         p1_x = x1 - 1
-
-    #     p1 = (p1_x, p1_y)
-    #     p2 = (p1_x, p1_y) # Same 'x' coord
-
-    # if (p1 in x_arr) and (p2 in x_arr):
-    #     return True
-    # else:
-    #     return False
+        if p1 in x_arr and p2 in x_arr:
+            if p1_x < 0 or p1_y < 0 or p2_x < 0 or p2_y < 0:
+                return 0
+            else:
+                return 1
+        elif p1 not in x_arr and p2 not in x_arr:
+            return 0
+    else:
+        print('Number of partition error!')
+        return False
 
 
 def solution(places):
@@ -147,7 +160,7 @@ def solution(places):
                             else:
                                 print('Exception: L1-norm error!')
                                 return False
-                        elif l1_norm > 3:
+                        elif l1_norm >= 3:
                             retval = 1
                         else:
                             print('Exception: L1-norm error!')
