@@ -23,7 +23,7 @@
         * Back-tracking
 * Practices
     * Data-structure
-        * Movie DB in C language
+        * Building movie DB in C language
         * Hash
         * Stack and Queue
         * Heap
