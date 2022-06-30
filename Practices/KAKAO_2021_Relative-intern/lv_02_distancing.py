@@ -25,7 +25,7 @@ def get_l1_norm(main_coord, sub_coord):
     # Calcutaing L1 norm
     if x + y == 0:
         return 0
-    if x + y == 1:
+    elif x + y == 1:
         return 1
     elif x + y == 2:
         return 2
@@ -190,7 +190,10 @@ def solution(places):
     
     for room in places:
         p_arr, o_arr, x_arr = get_pox_arr(room)
-        
+        print(p_arr)
+        print(x_arr)
+        print('------------------------------------------------------------')
+
         retval = main(p_arr, x_arr)
                     
         answer.append(retval)
@@ -199,10 +202,10 @@ def solution(places):
     return answer
 
 
-# solution([
-#     ["POOOP", "OXXOX", "OPXPX", "OOXOX", "POXXP"], 
-#     ["POOPX", "OXPXP", "PXXXO", "OXXXO", "OOOPP"], 
-#     ["PXOPX", "OXOXP", "OXPOX", "OXXOP", "PXPOX"], 
-#     ["OOOXX", "XOOOX", "OOOXX", "OXOOX", "OOOOO"], 
-#     ["PXPXP", "XPXPX", "PXPXP", "XPXPX", "PXPXP"]
-# ])
+solution([
+    ["POOOP", "OXXOX", "OPXPX", "OOXOX", "POXXP"], 
+    ["POOPX", "OXPXP", "PXXXO", "OXXXO", "OOOPP"], 
+    ["PXOPX", "OXOXP", "OXPOX", "OXXOP", "PXPOX"], 
+    ["OOOXX", "XOOOX", "OOOXX", "OXOOX", "OOOOO"], 
+    ["PXPXP", "XPXPX", "PXPXP", "XPXPX", "PXPXP"]
+])
